@@ -101,7 +101,7 @@ margin_bottom = 52.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 121.0
-margin_bottom = 45.0
+margin_bottom = 69.0
 
 [node name="WinnerLabel" type="Label" parent="CanvasLayer/EndGamePanel/VBoxContainer"]
 unique_name_in_owner = true
@@ -110,10 +110,17 @@ margin_bottom = 14.0
 text = "A WINNER IS YOU"
 
 [node name="PlayAgainButton" type="Button" parent="CanvasLayer/EndGamePanel/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 18.0
 margin_right = 114.0
 margin_bottom = 38.0
 text = "Play Again"
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/EndGamePanel/VBoxContainer"]
+margin_top = 42.0
+margin_right = 114.0
+margin_bottom = 62.0
+text = "Main Menu"
 
 [node name="Water" type="ColorRect" parent="CanvasLayer"]
 material = SubResource( 4 )
@@ -157,6 +164,7 @@ one_shot = true
 [connection signal="fired" from="Potato7" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato8" to="." method="_on_Potato_fired"]
 [connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]
 
 [editable path="Ground"]

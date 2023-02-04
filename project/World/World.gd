@@ -121,6 +121,7 @@ func _do_game_over(message:String)->void:
 	_is_game_over = true
 	$"%WinnerLabel".text = "%s has won" % message
 	$"%EndGamePanel".visible = true
+	$"%PlayAgainButton".grab_focus()
 
 
 func _on_PlayAgainButton_pressed():
@@ -133,3 +134,8 @@ func _on_TurnTimer_timeout()->void:
 	_active_potato.active = false
 	_camera.offset.x = 0.0
 	_end_potato_turn()
+
+
+func _on_MainMenuButton_pressed():
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://UI/MainMenu.tscn")

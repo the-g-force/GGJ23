@@ -5,6 +5,7 @@ onready var _fullscreen_toggle := $"%FullscreenToggle"
 
 func _ready():
 	_fullscreen_toggle.pressed = OS.window_fullscreen
+	$"%PlayButton".grab_focus()
 
 
 func _on_PlayButton_pressed()->void:

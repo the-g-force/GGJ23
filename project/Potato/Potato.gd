@@ -38,7 +38,7 @@ var _hold_duration := 0.0
 
 onready var _weapon_hinge := $WeaponHinge
 onready var _arrow : Sprite = $"%Arrow"
-onready var _name_label : Label = $NameLabel
+onready var _name_label : Label = $NameLabelHolder/NameLabel
 onready var _action_prefix := "p%d_" % player_index
 
 

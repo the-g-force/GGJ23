@@ -1,11 +1,16 @@
 extends Node2D
 
 onready var _ground_polygon : CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
+onready var _camera : Camera2D = $Camera2D
 
 
 func _input(event):
 	if event.is_pressed():
 		clip($Polygon2D)
+
+
+func _process(_delta):
+	_camera.global_position.x = $Potato.global_position.x
 
 
 func clip(polygon:Polygon2D)->void:

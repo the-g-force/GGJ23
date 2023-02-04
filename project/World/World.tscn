@@ -10,7 +10,8 @@ script = ExtResource( 1 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 2, 449, 96, 343, 185, 342, 332, 346, 434, 416, 531, 382, 677, 492, 831, 384, 1027, 333, 1027, 611, -6, 614 )
+position = Vector2( 15, -3 )
+polygon = PoolVector2Array( 2, 449, 96, 343, 185, 342, 332, 346, 434, 416, 531, 382, 677, 492, 737, 426, 831, 384, 1027, 333, 1120, 237, 1299, 157, 1403, 188, 1536, 276, 1606, 288, 1726, 299, 1833, 357, 1943, 418, 1941, 558, 1339, 566, 1303, 440, 1027, 611, -6, 614 )
 
 [node name="Bullet" parent="." instance=ExtResource( 2 )]
 position = Vector2( 783, 184 )
@@ -22,3 +23,7 @@ polygon = PoolVector2Array( -34, -36, 30, -25, 38, 51, -40, 47 )
 
 [node name="Potato" parent="." instance=ExtResource( 3 )]
 position = Vector2( 276, 274 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, 300 )
+current = true

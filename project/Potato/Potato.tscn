@@ -10,3 +10,8 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="WeaponHinge" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="WeaponHinge"]
+position = Vector2( 50, 0 )

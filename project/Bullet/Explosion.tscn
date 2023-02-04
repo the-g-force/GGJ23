@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.170391, 0.636872, 0.790503, 0.969274 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.210526, 0.210526, 0.210526, 1, 0.393443, 0.393443, 0.393443, 1, 0, 0, 0, 1 )
+
+[node name="Explosion" type="CPUParticles2D"]
+amount = 70
+preprocess = 0.4
+speed_scale = 1.5
+explosiveness = 0.4
+randomness = 0.02
+spread = 180.0
+gravity = Vector2( 0, 20 )
+initial_velocity = 91.28
+scale_amount = 14.76
+color = Color( 0.854902, 0.647059, 0.156863, 1 )
+color_ramp = SubResource( 1 )

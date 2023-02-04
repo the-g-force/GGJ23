@@ -23,6 +23,10 @@ func _process(delta:float)->void:
 func _on_Bullet_body_entered(body:Node)->void:
 	if body.has_method("clip"):
 		body.clip(_explosion_shape)
+		var explosion := preload("res://Bullet/Explosion.tscn").instance()
+		explosion.global_position = global_position
+		body.get_parent().add_child(explosion)
+		explosion.one_shot = true
 	
 	for object in $Area2D.get_overlapping_areas():
 		if object.has_method("damage"):

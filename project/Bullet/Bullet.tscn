@@ -15,4 +15,4 @@ shape = SubResource( 1 )
 [node name="ExplosionShape" type="Polygon2D" parent="."]
 polygon = PoolVector2Array( -46, -54, -2, -83, 43, -60, 66, -1, 48, 45, 0, 72, -54, 47, -58, -17 )
 
-[connection signal="body_shape_entered" from="." to="." method="_on_Bullet_body_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

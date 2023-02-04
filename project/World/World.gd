@@ -1,12 +1,16 @@
 extends Node2D
 
-onready var followed_node : Node2D = $Potato
-onready var _camera : Camera2D = $Camera2D
+
+export var camera_move_speed := 100.0
 
 var _active_potato : Node2D 
 
 var _player_index := 0
 var _is_game_over := false
+var _camera_offset := 0.0
+
+onready var followed_node : Node2D = $Potato
+onready var _camera : Camera2D = $Camera2D
 
 # We want the nested lists to be a continuous queue of potato turn orders.
 onready var _player_potatoes := [
@@ -30,14 +34,20 @@ func _ready()->void:
 	_active_potato.active = true
 
 
-func _physics_process(_delta)->void:
+func _physics_process(delta:float)->void:
 	if is_instance_valid(followed_node):
-		_camera.global_position.x = followed_node.global_position.x
+		_camera.global_position.x = followed_node.global_position.x + _camera_offset
+	
+		if _active_potato.active:
+			var action_prefix := "p%d_" % _player_index
+			var camera_movement := Input.get_axis(action_prefix + "look_left", action_prefix + "look_right")
+			_camera_offset += camera_movement * camera_move_speed * delta
 
 
 func _on_Potato_fired(bullet:Node2D)->void:
 	_active_potato.active = false
 	followed_node = bullet
+	_camera_offset = 0.0
 	yield(bullet, "done")
 	
 	if not _is_game_over:

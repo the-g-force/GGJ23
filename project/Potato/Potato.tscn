@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Potato/Potato.gd" type="Script" id=1]
 [ext_resource path="res://Potato/arrow.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Potato/Eye.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Potato/Hurtbox.gd" type="Script" id=5]
 [ext_resource path="res://Resources/font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Potato/Gun.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 17.0
@@ -58,17 +59,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WeaponHinge" type="Node2D" parent="."]
-
-[node name="Position2D" type="Position2D" parent="WeaponHinge"]
-position = Vector2( 50, 0 )
-
-[node name="Arrow" type="Sprite" parent="WeaponHinge"]
-unique_name_in_owner = true
-material = SubResource( 3 )
-position = Vector2( 50, 0 )
-texture = ExtResource( 2 )
-
 [node name="NameLabel" type="Label" parent="."]
 margin_left = -30.0
 margin_top = -59.0
@@ -87,6 +77,20 @@ position = Vector2( -8, -29 )
 
 [node name="EyeRight" parent="." instance=ExtResource( 4 )]
 position = Vector2( 11, -26 )
+
+[node name="WeaponHinge" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="WeaponHinge"]
+position = Vector2( 50, 0 )
+
+[node name="Arrow" type="Sprite" parent="WeaponHinge"]
+unique_name_in_owner = true
+material = SubResource( 3 )
+position = Vector2( 76, -8 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="WeaponHinge"]
+texture = ExtResource( 7 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource( 5 )

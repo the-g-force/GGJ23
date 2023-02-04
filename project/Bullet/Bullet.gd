@@ -35,13 +35,18 @@ func _on_Bullet_body_entered(body:Node)->void:
 	body.get_parent().add_child(explosion)
 	explosion.one_shot = true
 	
-	# Damage every potato in the area
-	for object in $Area2D.get_overlapping_areas():
-		if object.has_method("damage"):
-			object.damage()
+	# This has to be deferred so that the physics state can catch
+	# up with the overlapping of the explosion area and potatoes.
+	call_deferred("_damage_in_area")
 	
 	SfxPlayer.play_explosion()
 	
 	emit_signal("exploded", explosion)
 	queue_free()
 
+
+func _damage_in_area()->void:
+	# Damage every potato in the area
+	for object in $Area2D.get_overlapping_areas():
+		if object.has_method("damage"):
+			object.damage()

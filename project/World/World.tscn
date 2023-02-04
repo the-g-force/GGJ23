@@ -57,7 +57,7 @@ position = Vector2( 1106, 181 )
 position = Vector2( -1185, 354 )
 
 [node name="Potato5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 61, 339 )
+position = Vector2( 61, 354 )
 
 [node name="Potato2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1562, 276 )

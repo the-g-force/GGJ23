@@ -86,7 +86,8 @@ position = Vector2( 50, 0 )
 [node name="Arrow" type="Sprite" parent="WeaponHinge"]
 unique_name_in_owner = true
 material = SubResource( 3 )
-position = Vector2( 76, -8 )
+position = Vector2( 77, -5 )
+scale = Vector2( 1, 0.64 )
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="WeaponHinge"]

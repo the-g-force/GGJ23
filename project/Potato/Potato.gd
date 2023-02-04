@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal fired(bullet)
 signal done
 signal died
+signal unearthed
 
 ## Walking speed
 const SPEED := 200.0
@@ -15,6 +16,8 @@ const MAX_HOLD_DURATION := 1.0
 
 const MIN_IMPULSE_POWER := 100
 const MAX_IMPULSE_POWER := 400
+
+const _BURY_DEPTH := 50
 
 enum _Facing { LEFT, RIGHT }
 
@@ -47,7 +50,7 @@ func _physics_process(delta:float)->void:
 	_health_bar.value = _health
 	
 	_velocity.y += _GRAVITY
-		
+	
 	if active:
 		var direction := Input.get_axis(_action_prefix + "left", _action_prefix + "right")
 		if direction!=0:
@@ -115,7 +118,21 @@ func damage(amount:int)->void:
 
 
 func bury()->void:
-	print("go underground")
+#	while not is_on_floor():
+#		yield(get_tree().create_timer(0.05), "timeout")
+	set_physics_process(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	$BuryTween.interpolate_property(self, "position", null, Vector2(position.x, position.y + _BURY_DEPTH), 0.75, Tween.TRANS_QUAD)
+	$BuryTween.start()
 	# the wait is necessary for testing purposes
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield($BuryTween, "tween_all_completed")
 	emit_signal("done")
+
+
+func unearth()->void:
+	$BuryTween.interpolate_property(self, "position", null, Vector2(position.x, position.y - _BURY_DEPTH), 0.75, Tween.TRANS_QUAD)
+	$BuryTween.start()
+	yield($BuryTween, "tween_all_completed")
+	$CollisionShape2D.disabled = false
+	set_physics_process(true)
+	emit_signal("unearthed")

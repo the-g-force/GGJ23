@@ -49,6 +49,8 @@ func _start_next_turn()->void:
 	_player_index = (_player_index + 1) % _player_potatoes.size()
 	
 	_active_potato = _player_potatoes[_player_index][0]
+	_active_potato.unearth()
+	yield(_active_potato, "unearthed")
 	_active_potato.active = true
 	followed_node = _active_potato
 

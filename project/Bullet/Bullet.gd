@@ -23,9 +23,11 @@ func _draw()->void:
 func _on_Bullet_body_entered(body:Node)->void:
 	if body.has_method("clip"):
 		body.clip(_explosion_shape)
-	for object in $Area2D.get_overlapping_bodies():
+	
+	for object in $Area2D.get_overlapping_areas():
 		if object.has_method("damage"):
 			object.damage(25)
+	
 	emit_signal("done")
 	queue_free()
 

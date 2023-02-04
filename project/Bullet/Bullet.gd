@@ -2,7 +2,7 @@ extends RigidBody2D
 
 const KILL_LINE := 600
 
-onready var _explosion_shape := $ExplosionShape
+onready var _explosion_shape : CollisionPolygon2D = $Area2D/ExplosionShape
 
 
 func _ready()->void:
@@ -20,5 +20,8 @@ func _draw()->void:
 func _on_Bullet_body_entered(body:Node)->void:
 	if body.has_method("clip"):
 		body.clip(_explosion_shape)
-		queue_free()
+	for object in $Area2D.get_overlapping_bodies():
+		if object.has_method("damage"):
+			object.damage(25)
+	queue_free()
 

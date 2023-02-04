@@ -12,7 +12,9 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="ExplosionShape" type="Polygon2D" parent="."]
-polygon = PoolVector2Array( -46, -54, -2, -83, 43, -60, 66, -1, 48, 45, 0, 72, -54, 47, -58, -17 )
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="ExplosionShape" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -2, -80, 43, -60, 66, -1, 49, 44, -1, 73, -56, 45, -58, -13, -45, -53 )
 
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

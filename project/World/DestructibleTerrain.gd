@@ -8,7 +8,7 @@ var polygon : PoolVector2Array setget _set_polygon, _get_polygon
 onready var _collision_polygon : CollisionPolygon2D = $CollisionPolygon2D
 
 
-func clip(polygon_to_clip:Polygon2D)->void:
+func clip(polygon_to_clip)->void:
 	var offset_polygon := _offset_polygon(polygon_to_clip.polygon, polygon_to_clip.global_position)
 	
 	var clip_result := Geometry.clip_polygons_2d(_collision_polygon.polygon, offset_polygon)

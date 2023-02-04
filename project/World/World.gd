@@ -130,5 +130,6 @@ func _on_PlayAgainButton_pressed():
 
 
 func _on_TurnTimer_timeout()->void:
+	SfxPlayer.play_timeout()
 	_active_potato.active = false
 	_end_potato_turn()

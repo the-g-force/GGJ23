@@ -25,3 +25,5 @@ make godot=/mnt/c/Users/pvgestwicki/Desktop/Godot_v3.5-stable_win64.exe
 - Dirt texture is public domain art from OpenGameArt.org [Dirt 10](https://opengameart.org/content/simple-seamless-tiles-of-dirt-and-sand-dirt-10-png)
 
 - Button press is the public domain [Button 05](https://freesound.org/people/JarredGibb/sounds/219476/)
+
+- Timeout sound is the public domain [Error Signal 1](https://freesound.org/people/Breviceps/sounds/445976/)

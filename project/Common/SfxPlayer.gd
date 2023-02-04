@@ -11,3 +11,7 @@ func play_splash()->void:
 
 func play_shoot()->void:
 	$Shoot.play()
+
+
+func play_timeout()->void:
+	$Timeout.play()

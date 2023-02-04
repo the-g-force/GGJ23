@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Common/SfxPlayer.gd" type="Script" id=1]
 [ext_resource path="res://Bullet/explosion.wav" type="AudioStream" id=2]
 [ext_resource path="res://Bullet/splash.wav" type="AudioStream" id=3]
 [ext_resource path="res://Bullet/shoot.wav" type="AudioStream" id=4]
+[ext_resource path="res://World/timeout.wav" type="AudioStream" id=5]
 
 [node name="SfxPlayer" type="Node"]
 script = ExtResource( 1 )
@@ -18,4 +19,8 @@ bus = "SFX"
 
 [node name="Shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="Timeout" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 bus = "SFX"

@@ -6,6 +6,8 @@ var _GRAVITY : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _velocity := Vector2.ZERO
 var _shoot_press_time := 0.0
+var _can_shoot := true
+
 
 func _physics_process(delta:float)->void:
 	$WeaponHinge.rotation = get_angle_to(get_global_mouse_position())
@@ -19,20 +21,28 @@ func _physics_process(delta:float)->void:
 	
 	_velocity = move_and_slide(linear_velocity, Vector2.UP)
 	
-	if Input.is_action_pressed("p0_shoot") and _shoot_press_time < 1.0:
+	if Input.is_action_pressed("p0_shoot") and _shoot_press_time < 1.0 and _can_shoot:
 		_shoot_press_time += delta
 	
-	if Input.is_action_just_released("p0_shoot"):
+	if Input.is_action_just_released("p0_shoot") and _can_shoot:
 		_shoot()
 
 
 func _shoot()->void:
 	var bullet = preload("res://Bullet/Bullet.tscn").instance()
+
 	bullet.global_position = $WeaponHinge/Position2D.global_position
 	get_parent().add_child(bullet)
 	bullet.apply_impulse(Vector2.ZERO, lerp(Vector2.ZERO, Vector2.RIGHT.rotated($WeaponHinge.rotation) * 400, _shoot_press_time))
+
 	_shoot_press_time = 0.0
+	_can_shoot = false
+
 	emit_signal("fired", bullet)
+	
+	# single-player playtest placeholder
+	yield(bullet, "tree_exited")
+	_can_shoot = true
 
 
 func _draw():

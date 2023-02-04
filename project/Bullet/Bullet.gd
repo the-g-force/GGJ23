@@ -15,6 +15,10 @@ func _process(delta:float)->void:
 	$Sprite.rotate(_spin*delta)
 	
 	if global_position.y > KILL_LINE:
+		var splash := preload("res://Bullet/Splash.tscn").instance()
+		splash.global_position = global_position
+		splash.one_shot = true
+		get_parent().add_child(splash)
 		SfxPlayer.play_splash()
 		emit_signal("done")
 		queue_free()

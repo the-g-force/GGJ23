@@ -21,8 +21,7 @@ var _player_index := 0
 var _is_game_over := false
 var _camera_offset := 0.0
 
-onready var followed_node : Node2D = $Potato5
-onready var _camera : Camera2D = $Camera2D
+onready var _camera : SmartCamera = $Camera2D
 onready var _turn_timer : Timer = $TurnTimer
 
 # We want the nested lists to be a continuous queue of potato turn orders.
@@ -34,6 +33,7 @@ onready var _player_potatoes := [
 
 func _ready()->void:
 	_active_potato = $Potato5
+	_camera.target = _active_potato
 	
 	for player_list in _player_potatoes:
 		for potato in player_list:
@@ -50,10 +50,7 @@ func _ready()->void:
 
 
 func _physics_process(delta:float)->void:
-	$CanvasLayer/TimeLabel.text = str(int(_turn_timer.time_left))
-	
-	if is_instance_valid(followed_node):
-		_camera.global_position.x = followed_node.global_position.x + _camera_offset
+	$CanvasLayer/TimeLabel.text = str(ceil(_turn_timer.time_left))
 	
 	if is_instance_valid(_active_potato) and _active_potato.active:
 		var action_prefix := "p%d_" % _player_index
@@ -64,7 +61,7 @@ func _physics_process(delta:float)->void:
 func _on_Potato_fired(bullet:Node2D)->void:
 	_turn_timer.stop() # so that the turn doesn't end twice
 	_active_potato.active = false
-	followed_node = bullet
+	_camera.target = bullet
 	_camera_offset = 0.0
 	var explosion = yield(bullet, "exploded")
 	yield(explosion, "tree_exited")
@@ -76,7 +73,7 @@ func _on_Potato_fired(bullet:Node2D)->void:
 func _end_potato_turn()->void:
 	if not _is_game_over:
 		if is_instance_valid(_active_potato):
-			followed_node = _active_potato
+			_camera.target = _active_potato
 			_active_potato.bury()
 			yield(_active_potato, "done")
 			_start_next_turn()
@@ -91,7 +88,7 @@ func _start_next_turn()->void:
 	_active_potato = _player_potatoes[_player_index][0]
 	_player_potatoes[_player_index].remove(0)
 	_player_potatoes[_player_index].append(_active_potato)
-	followed_node = _active_potato
+	_camera.target = _active_potato
 	_active_potato.unearth()
 	yield(_active_potato, "unearthed")
 	_active_potato.active = true

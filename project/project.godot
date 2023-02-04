@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "DestructibleTerrain",
 "language": "GDScript",
 "path": "res://World/DestructibleTerrain.gd"
+}, {
+"base": "Camera2D",
+"class": "SmartCamera",
+"language": "GDScript",
+"path": "res://World/SmartCamera.gd"
 } ]
 _global_script_class_icons={
-"DestructibleTerrain": ""
+"DestructibleTerrain": "",
+"SmartCamera": ""
 }
 
 [application]

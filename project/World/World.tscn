@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://World/DestructibleTerrain.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Potato/Potato.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/SmartCamera.gd" type="Script" id=4]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -69,6 +70,7 @@ player_index = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, 300 )
 current = true
+script = ExtResource( 4 )
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
 

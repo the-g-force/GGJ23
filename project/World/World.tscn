@@ -23,7 +23,38 @@ current = true
 [node name="CollisionPolygon2D" parent="Ground" index="0"]
 polygon = PoolVector2Array( 2, 417, 226, 307, 450, 313, 596, 382, 755, 155, 768, 351, 1186, 210, 1486, 243, 1473, 636, -1, 593 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndGamePanel" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 128.0
+margin_bottom = 52.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndGamePanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 121.0
+margin_bottom = 45.0
+
+[node name="WinnerLabel" type="Label" parent="CanvasLayer/EndGamePanel/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 114.0
+margin_bottom = 14.0
+text = "A WINNER IS YOU"
+
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer/EndGamePanel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 114.0
+margin_bottom = 38.0
+text = "Play Again"
+
 [connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato2" to="." method="_on_Potato_fired"]
+[connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 
 [editable path="Ground"]

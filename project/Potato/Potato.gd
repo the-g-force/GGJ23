@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal fired(bullet)
+signal died
 
 ## Walking speed
 const SPEED := 200.0
@@ -26,7 +27,7 @@ var _GRAVITY : float = 10 #ProjectSettings.get_setting("physics/2d/default_gravi
 var _velocity := Vector2.ZERO
 var _facing = _Facing.RIGHT
 var _elevation := 0.0
-var _health := 100
+var _health := 25 # 100
 
 ## The number of seconds the fire button has been held
 var _hold_duration := 0.0
@@ -93,9 +94,6 @@ func _shoot(power:float)->void:
 	bullet.apply_impulse(Vector2.ZERO, impulse)
 
 	emit_signal("fired", bullet)
-	
-	# single-player playtest placeholder
-	yield(bullet, "tree_exited")
 
 
 func _set_active(value:bool)->void:
@@ -111,3 +109,5 @@ func _set_shader_percent(percent:float)->void:
 
 func damage(amount:int)->void:
 	_health -= amount
+	if _health<=0:
+		emit_signal("died")

@@ -1,4 +1,5 @@
 name=potato
+godot=godot
 
 all: windows linux zip
 
@@ -7,11 +8,11 @@ clean:
 
 windows:
 	mkdir -p build/linux
-	godot -v --export "Linux/X11" ../build/linux/$(name).x86_64 project/project.godot
+	$(godot) -v --export "Linux/X11" ../build/linux/$(name).x86_64 project/project.godot
 
 linux:
 	mkdir -p build/windows
-	godot -v --export "Windows Desktop" ../build/windows/$(name).exe project/project.godot
+	$(godot) -v --export "Windows Desktop" ../build/windows/$(name).exe project/project.godot
 
 zip: windows linux
 	mkdir -p build/zip

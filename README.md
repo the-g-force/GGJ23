@@ -2,6 +2,15 @@
 
 A game for Global Game Jam 2023.
 
+## Building
+
+The [Makefile] will build the Linux and Windows targets and also the zip file required for GGJ upload.
+To specify where Godot is, pass the path to the `godot` variable in the command line,
+like this:
+```
+make godot=/mnt/c/Users/pvgestwicki/Desktop/Godot_v3.5-stable_win64.exe
+```
+
 ## Third-Party Assets
 - Potato image based on the public domain [Russet_potato_cultivar_with_sprouts](https://en.wikipedia.org/wiki/File:Russet_potato_cultivar_with_sprouts.jpg)
 

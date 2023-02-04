@@ -88,10 +88,6 @@ func _shoot(power:float)->void:
 	yield(bullet, "tree_exited")
 
 
-func _draw():
-	draw_circle(Vector2.ZERO, 25.0, Color.brown)
-
-
 func _set_active(value:bool)->void:
 	active = value
 	_arrow.visible = active

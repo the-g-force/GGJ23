@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://World/DestructibleTerrain.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Potato/Potato.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/SmartCamera.gd" type="Script" id=4]
+[ext_resource path="res://World/TimeLabel.gd" type="Script" id=5]
+[ext_resource path="res://Resources/HappyMonkey-Regular.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -22,6 +24,12 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
 shader_param/water_color = Color( 0, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+outline_size = 2
+outline_color = Color( 0.0980392, 0.0705882, 0.368627, 1 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.446927, 1 )
@@ -121,6 +129,9 @@ anchor_right = 0.5
 margin_left = -20.0
 margin_right = 20.0
 margin_bottom = 14.0
+custom_fonts/font = SubResource( 5 )
+script = ExtResource( 5 )
+timer = NodePath("../../TurnTimer")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -134,7 +145,7 @@ __meta__ = {
 texture = SubResource( 2 )
 
 [node name="TurnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]

@@ -50,8 +50,6 @@ func _ready()->void:
 
 
 func _physics_process(delta:float)->void:
-	$CanvasLayer/TimeLabel.text = str(ceil(_turn_timer.time_left))
-	
 	if is_instance_valid(_active_potato) and _active_potato.active:
 		var action_prefix := "p%d_" % _player_index
 		var camera_movement := Input.get_axis(action_prefix + "look_left", action_prefix + "look_right")

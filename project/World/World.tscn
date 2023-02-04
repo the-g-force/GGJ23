@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Bullet/Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Potato/Potato.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,12 +10,15 @@ script = ExtResource( 1 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 2, 449, 127, 218, 185, 342, 368, 103, 434, 416, 512, 310, 677, 492, 830, 303, 1024, 187, 1027, 611, -6, 614 )
+polygon = PoolVector2Array( 2, 449, 96, 343, 185, 342, 332, 346, 434, 416, 531, 382, 677, 492, 831, 384, 1027, 333, 1027, 611, -6, 614 )
 
 [node name="Bullet" parent="." instance=ExtResource( 2 )]
-position = Vector2( 535, 270 )
+position = Vector2( 783, 184 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2( 331, 168 )
 color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( -34, -36, 30, -25, 38, 51, -40, 47 )
+
+[node name="Potato" parent="." instance=ExtResource( 3 )]
+position = Vector2( 276, 274 )

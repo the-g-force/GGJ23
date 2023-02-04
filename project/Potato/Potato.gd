@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal fired(bullet)
 
+## Index of the controlling player (0-based)
 export var player_index := 0
 
 var active := false
@@ -19,7 +20,8 @@ func _physics_process(delta:float)->void:
 	
 	$WeaponHinge.rotation = get_angle_to(get_global_mouse_position())
 	
-	var direction := Input.get_axis("p0_left", "p0_right")
+	var action_prefix := "p%d_" % player_index
+	var direction := Input.get_axis(action_prefix + "left", action_prefix + "right")
 	var linear_velocity := Vector2(200*direction, 0)
 	
 	# Only pull downward when in the air

@@ -34,14 +34,13 @@ onready var _health_bar : ProgressBar = $HealthBar
 
 
 func _physics_process(delta:float)->void:
-	if not active:
-		return
+	_health_bar.value = _health
 	
 	var action_prefix := "p%d_" % player_index
 	var direction := Input.get_axis(action_prefix + "left", action_prefix + "right")
 	var linear_velocity := Vector2(200*direction, 0)
 
-	if direction!=0:
+	if active and direction!=0:
 		_facing = _Facing.RIGHT if direction>0 else _Facing.LEFT
 		# Setting scale.x to -1 or 1 does not work because then the child's
 		# rotation gets unpredictable. Instead, later, the rotation is updated
@@ -55,19 +54,19 @@ func _physics_process(delta:float)->void:
 	
 	_velocity = move_and_slide(linear_velocity, Vector2.UP)
 	
-	var elevation_input := Input.get_axis(action_prefix + "up", action_prefix + "down")
-	_elevation = clamp(_elevation + elevation_input * WEAPON_ROTATION_SPEED * delta, -TAU/4.0, 0)
-	_weapon_hinge.rotation = _elevation if _facing==_Facing.RIGHT else PI - _elevation
-	
-	var percent := clamp(range_lerp(_hold_duration, 0, MAX_HOLD_DURATION, 0, 1), 0, 1)
-	if Input.is_action_pressed(action_prefix + "shoot"):
-		_hold_duration += delta
-		_set_shader_percent(percent)
-	elif Input.is_action_just_released(action_prefix + "shoot"):
-		_shoot(percent)
-		_hold_duration = 0.0
-	
-	_health_bar.value = _health
+	if active:
+		var elevation_input := Input.get_axis(action_prefix + "up", action_prefix + "down")
+		_elevation = clamp(_elevation + elevation_input * WEAPON_ROTATION_SPEED * delta, -TAU/4.0, 0)
+		_weapon_hinge.rotation = _elevation if _facing==_Facing.RIGHT else PI - _elevation
+		
+		var percent := clamp(range_lerp(_hold_duration, 0, MAX_HOLD_DURATION, 0, 1), 0, 1)
+		if Input.is_action_pressed(action_prefix + "shoot"):
+			_hold_duration += delta
+			_set_shader_percent(percent)
+		elif Input.is_action_just_released(action_prefix + "shoot"):
+			_shoot(percent)
+			_hold_duration = 0.0
+			
 
 ## Shoot a projectile
 ##

@@ -53,6 +53,10 @@ func _ready():
 func _physics_process(delta:float)->void:
 	_velocity.y += _GRAVITY
 	
+	if position.y > 600:
+		SfxPlayer.play_splash()
+		emit_signal("died")
+	
 	if active:
 		var direction := Input.get_axis(_action_prefix + "left", _action_prefix + "right")
 		if direction!=0:

@@ -27,3 +27,5 @@ position = Vector2( 276, 274 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, 300 )
 current = true
+
+[connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]

@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var followed_node : Node2D = $Potato
 onready var _ground_polygon : CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 onready var _camera : Camera2D = $Camera2D
 
@@ -10,7 +11,8 @@ func _input(event):
 
 
 func _process(_delta):
-	_camera.global_position.x = $Potato.global_position.x
+	
+	_camera.global_position.x = followed_node.global_position.x
 
 
 func clip(polygon:Polygon2D)->void:
@@ -29,3 +31,9 @@ func clip(polygon:Polygon2D)->void:
 
 func _draw()->void:
 	draw_colored_polygon(_ground_polygon.polygon, Color.blue)
+
+
+func _on_Potato_fired(bullet:Node2D)->void:
+	followed_node = bullet
+	yield(bullet, "tree_exited")
+	followed_node = $Potato

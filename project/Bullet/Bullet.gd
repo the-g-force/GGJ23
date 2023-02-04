@@ -1,10 +1,16 @@
 extends RigidBody2D
 
+const KILL_LINE := 600
+
 onready var _explosion_shape := $ExplosionShape
 
 
 func _ready()->void:
 	_explosion_shape.visible = false
+
+func _process(_delta:float)->void:
+	if global_position.y > KILL_LINE:
+		queue_free()
 
 
 func _draw()->void:

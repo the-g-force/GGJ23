@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal fired(bullet)
+
 var _GRAVITY : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _velocity := Vector2.ZERO
@@ -30,6 +32,7 @@ func _shoot()->void:
 	get_parent().add_child(bullet)
 	bullet.apply_impulse(Vector2.ZERO, lerp(Vector2.ZERO, Vector2.RIGHT.rotated($WeaponHinge.rotation) * 400, _shoot_press_time))
 	_shoot_press_time = 0.0
+	emit_signal("fired", bullet)
 
 
 func _draw():

@@ -129,8 +129,10 @@ func damage()->void:
 
 
 func bury()->void:
-#	while not is_on_floor():
-#		yield(get_tree().create_timer(0.05), "timeout")
+	while not is_on_floor():
+		yield(get_tree().create_timer(0.05), "timeout")
+	
+	_hold_duration = 0.0
 	
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)

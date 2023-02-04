@@ -25,12 +25,11 @@ func _ready()->void:
 	for player_list in _player_potatoes:
 		for potato in player_list:
 			potato.connect("died", self, "_on_Potato_died", [potato])
-			potato.bury()
+			if potato != _active_potato:
+				potato.bury()
 	
-	yield(_active_potato, "done")
+	yield($Potato2, "done")
 	
-	_active_potato.unearth()
-	yield(_active_potato, "unearthed")
 	_active_potato.active = true
 
 

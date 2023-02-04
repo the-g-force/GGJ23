@@ -18,7 +18,7 @@ func _draw()->void:
 
 
 func _on_Bullet_body_entered(body:Node)->void:
-	if body.get_parent().has_method("clip"):
-		body.get_parent().clip(_explosion_shape)
+	if body.has_method("clip"):
+		body.clip(_explosion_shape)
 		queue_free()
 

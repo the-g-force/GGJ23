@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "StaticBody2D",
+"class": "DestructibleTerrain",
+"language": "GDScript",
+"path": "res://World/DestructibleTerrain.gd"
+} ]
+_global_script_class_icons={
+"DestructibleTerrain": ""
+}
+
 [application]
 
 config/name="GGJ23"

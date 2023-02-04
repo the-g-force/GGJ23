@@ -1,10 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Potato/Potato.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Potato/arrow.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 25.0
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float percent = 0.0;
+uniform vec4 fill_color : hint_color = vec4(1,0.2,0.2,1);
+uniform vec4 empty_color : hint_color = vec4(0.2,0.2,0.2,1);
+
+void fragment() {
+	vec4 sample = texture(TEXTURE,UV);
+	
+	// Ignore transparent pixels
+	if (sample.a < 0.5) {
+		COLOR = vec4(0,0,0,0);
+	}
+	// Use black pixels
+	else if (sample.r <= 0.1) {
+		COLOR = sample;
+	}
+	// Fill up to percent
+	else if (UV.x < percent) {
+		COLOR = fill_color;
+	}
+	// Use the empty color for the rest
+	else {
+		COLOR = empty_color;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/percent = 0.0
+shader_param/fill_color = Color( 1, 0.2, 0.2, 1 )
+shader_param/empty_color = Color( 0.2, 0.2, 0.2, 1 )
 
 [node name="Potato" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -17,6 +51,8 @@ shape = SubResource( 1 )
 [node name="Position2D" type="Position2D" parent="WeaponHinge"]
 position = Vector2( 50, 0 )
 
-[node name="Sprite" type="Sprite" parent="WeaponHinge"]
+[node name="Arrow" type="Sprite" parent="WeaponHinge"]
+unique_name_in_owner = true
+material = SubResource( 3 )
 position = Vector2( 50, 0 )
 texture = ExtResource( 2 )

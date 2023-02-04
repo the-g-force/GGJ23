@@ -6,12 +6,13 @@ export var camera_move_speed := 100.0
 var potato_names := [
 	"Steve",
 	"The Masher",
-	"Bob 6",
-	"Bob 1",
-	"Bob 2",
-	"Bob 3",
-	"Bob 4",
-	"Bob 5",
+	"Horatio Potatio",
+	"Thumbelina",
+	"Baked Baron",
+	"McSpudders",
+	"Latke",
+	"Tomorrow's Gnocchi",
+	"Hashbrown"
 ]
 
 var _active_potato : Node2D 

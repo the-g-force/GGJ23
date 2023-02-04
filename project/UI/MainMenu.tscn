@@ -17,6 +17,11 @@ anchor_bottom = 1.0
 theme = SubResource( 2 )
 script = ExtResource( 2 )
 
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.298039, 0.113725, 0.113725, 1 )
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,7 +35,8 @@ margin_bottom = 20.0
 [node name="Title" type="Label" parent="VBoxContainer"]
 margin_right = 344.0
 margin_bottom = 30.0
-text = "Stormclouds over Potatoville"
+text = "Stormclouds over Spudville"
+align = 1
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 margin_top = 34.0
@@ -48,6 +54,24 @@ text = "Fullscreen"
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "SFX"
+
+[node name="CreditsLabel" type="Label" parent="."]
+margin_left = 33.0
+margin_top = 468.0
+margin_right = 292.0
+margin_bottom = 531.0
+text = "A game by Paul, Alex, and Leo Gestwicki
+Featuring music by Robin Walma"
+autowrap = true
+
+[node name="AboutLabel" type="Label" parent="."]
+margin_left = 743.0
+margin_top = 514.0
+margin_right = 1002.0
+margin_bottom = 577.0
+text = "Made for Global Game Jame 2023"
+align = 2
+autowrap = true
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="toggled" from="VBoxContainer/FullscreenToggle" to="." method="_on_FullscreenToggle_toggled"]

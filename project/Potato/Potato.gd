@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal fired(bullet)
+signal done
 signal died
 
 ## Walking speed
@@ -111,3 +112,10 @@ func damage(amount:int)->void:
 	_health -= amount
 	if _health<=0:
 		emit_signal("died")
+
+
+func bury()->void:
+	print("go underground")
+	# the wait is necessary for testing purposes
+	yield(get_tree().create_timer(0.5), "timeout")
+	emit_signal("done")

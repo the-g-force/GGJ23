@@ -32,9 +32,13 @@ func _physics_process(_delta)->void:
 func _on_Potato_fired(bullet:Node2D)->void:
 	_active_potato.active = false
 	followed_node = bullet
-	yield(bullet, "tree_exited")
+	yield(bullet, "done")
 	
 	if not _is_game_over:
+		followed_node = _active_potato
+		_active_potato.bury()
+		yield(_active_potato, "done")
+		print("hey")
 		_start_next_turn()
 	
 

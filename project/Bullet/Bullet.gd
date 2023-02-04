@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal done
+
 const KILL_LINE := 600
 
 onready var _explosion_shape : CollisionPolygon2D = $Area2D/ExplosionShape
@@ -10,6 +12,7 @@ func _ready()->void:
 
 func _process(_delta:float)->void:
 	if global_position.y > KILL_LINE:
+		emit_signal("done")
 		queue_free()
 
 
@@ -23,5 +26,6 @@ func _on_Bullet_body_entered(body:Node)->void:
 	for object in $Area2D.get_overlapping_bodies():
 		if object.has_method("damage"):
 			object.damage(25)
+	emit_signal("done")
 	queue_free()
 

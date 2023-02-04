@@ -23,12 +23,14 @@ var _GRAVITY : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _velocity := Vector2.ZERO
 var _facing = _Facing.RIGHT
 var _elevation := 0.0
+var _health := 100
 
 ## The number of seconds the fire button has been held
 var _hold_duration := 0.0
 
 onready var _weapon_hinge := $WeaponHinge
 onready var _arrow : Sprite = $"%Arrow"
+onready var _health_bar : ProgressBar = $HealthBar
 
 
 func _physics_process(delta:float)->void:
@@ -64,7 +66,8 @@ func _physics_process(delta:float)->void:
 	elif Input.is_action_just_released(action_prefix + "shoot"):
 		_shoot(percent)
 		_hold_duration = 0.0
-		
+	
+	_health_bar.value = _health
 
 ## Shoot a projectile
 ##
@@ -99,3 +102,6 @@ func _set_shader_percent(percent:float)->void:
 	assert(percent >= 0.0 and percent <= 1.0)
 	(_arrow.material as ShaderMaterial).set_shader_param("percent", percent)
 
+
+func damage(amount:int)->void:
+	_health -= amount

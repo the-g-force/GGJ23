@@ -12,7 +12,16 @@ var potato_names := [
 	"McSpudders",
 	"Latke",
 	"Tomorrow's Gnocchi",
-	"Hashbrown"
+	"Hashbrown",
+	"Solanum Tuberosum",
+	"Starchmeister",
+	"Papa Batata",
+	"Chippy",
+	"Fry",
+	"Vladimir Poutine",
+	"Pomme Pomme",
+	"Quayle's Folly",
+	"Mr. Head",
 ]
 
 var _active_potato : Node2D 

@@ -1,5 +1,10 @@
 extends Node
 
+func _ready():
+	# You might ask yourself, "Why is this being called here?"
+	# It is so that we seed the randomizer only once, and as this
+	# is effectively a singleton, this is a good a place as any.
+	randomize()
 
 func play_explosion()->void:
 	$Explosion.play()

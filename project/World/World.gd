@@ -15,19 +15,13 @@ onready var _player_potatoes := [
 ]
 
 
-func _ready():
+func _ready()->void:
 	_active_potato = $Potato
 	$Potato.active = true
 
 
-func _input(event):
-	if event.is_pressed():
-		clip($Polygon2D)
-
-
-func _physics_process(_delta):
+func _physics_process(_delta)->void:
 	_camera.global_position.x = followed_node.global_position.x
-	
 
 
 func clip(polygon:Polygon2D)->void:
@@ -41,7 +35,6 @@ func clip(polygon:Polygon2D)->void:
 	# we are only using the first one.
 	_ground_polygon.set_deferred("polygon", clip_result[0])
 	update()
-	
 
 
 func _draw()->void:

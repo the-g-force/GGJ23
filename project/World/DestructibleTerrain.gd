@@ -1,11 +1,14 @@
 class_name DestructibleTerrain
 extends StaticBody2D
 
-export var color := Color.blue
-
 var polygon : PoolVector2Array setget _set_polygon, _get_polygon
 
 onready var _collision_polygon : CollisionPolygon2D = $CollisionPolygon2D
+onready var _drawing_polygon : Polygon2D = $Polygon2D
+
+
+func _ready()->void:
+	_drawing_polygon.polygon = _collision_polygon.polygon
 
 
 func clip(polygon_to_clip)->void:
@@ -31,17 +34,9 @@ func clip(polygon_to_clip)->void:
 			island.polygon = island_polygon
 
 
-func _draw()->void:
-	draw_colored_polygon(_get_polygon(), color)
-
-
 func _set_polygon(value:PoolVector2Array)->void:
 	_collision_polygon.set_deferred("polygon", value)
-	# the idle_frame signal is emitted just before the _process function is called.
-	# it's used here to update the drawing AFTER the set_deferred kicks in.
-	# Otherwise, it would update drawing the polygon before setting the polygon to the new value.
-	yield(get_tree(), "idle_frame")
-	update()
+	_drawing_polygon.polygon = value
 
 
 func _get_polygon()->PoolVector2Array:

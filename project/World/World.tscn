@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://World/DestructibleTerrain.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Potato/Potato.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.446927, 1 )
+colors = PoolColorArray( 0, 0.882813, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+width = 1024
+height = 600
+fill_from = Vector2( 1, 1 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -52,6 +62,14 @@ margin_top = 18.0
 margin_right = 114.0
 margin_bottom = 38.0
 text = "Play Again"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = SubResource( 2 )
 
 [connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato2" to="." method="_on_Potato_fired"]

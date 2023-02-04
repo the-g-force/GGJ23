@@ -6,6 +6,12 @@ export var camera_move_speed := 100.0
 var potato_names := [
 	"Steve",
 	"The Masher",
+	"Bob 6",
+	"Bob 1",
+	"Bob 2",
+	"Bob 3",
+	"Bob 4",
+	"Bob 5",
 ]
 
 var _active_potato : Node2D 
@@ -14,18 +20,18 @@ var _player_index := 0
 var _is_game_over := false
 var _camera_offset := 0.0
 
-onready var followed_node : Node2D = $Potato
+onready var followed_node : Node2D = $Potato5
 onready var _camera : Camera2D = $Camera2D
 
 # We want the nested lists to be a continuous queue of potato turn orders.
 onready var _player_potatoes := [
-	[$Potato],
-	[$Potato2]
+	[$Potato, $Potato3, $Potato4, $Potato5],
+	[$Potato2, $Potato6, $Potato7, $Potato8]
 ]
 
 
 func _ready()->void:
-	_active_potato = $Potato
+	_active_potato = $Potato5
 	
 	for player_list in _player_potatoes:
 		for potato in player_list:
@@ -35,7 +41,7 @@ func _ready()->void:
 			if potato != _active_potato:
 				potato.bury()
 	
-	yield($Potato2, "done")
+	yield($Potato, "done")
 	
 	_active_potato.active = true
 
@@ -70,6 +76,8 @@ func _start_next_turn()->void:
 	_player_index = (_player_index + 1) % _player_potatoes.size()
 	
 	_active_potato = _player_potatoes[_player_index][0]
+	_player_potatoes[_player_index].remove(0)
+	_player_potatoes[_player_index].append(_active_potato)
 	followed_node = _active_potato
 	_active_potato.unearth()
 	yield(_active_potato, "unearthed")

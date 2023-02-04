@@ -34,12 +34,36 @@ fill_from = Vector2( 1, 1 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ -4030.0 ]
+}
 
 [node name="Potato" parent="." instance=ExtResource( 3 )]
-position = Vector2( 276, 274 )
+position = Vector2( -2899, 301 )
+
+[node name="Potato3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1238, 389 )
+
+[node name="Potato4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1705, 299 )
+
+[node name="Potato5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 561, 314 )
 
 [node name="Potato2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 865, 283 )
+position = Vector2( 2575, 335 )
+player_index = 1
+
+[node name="Potato6" parent="." instance=ExtResource( 3 )]
+position = Vector2( -2122, 212 )
+player_index = 1
+
+[node name="Potato7" parent="." instance=ExtResource( 3 )]
+position = Vector2( -324, 195 )
+player_index = 1
+
+[node name="Potato8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1027, 243 )
 player_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -49,7 +73,7 @@ current = true
 [node name="Ground" parent="." instance=ExtResource( 2 )]
 
 [node name="CollisionPolygon2D" parent="Ground" index="0"]
-polygon = PoolVector2Array( 2, 417, 226, 307, 450, 313, 596, 382, 755, 155, 768, 351, 1186, 210, 1486, 243, 1473, 636, -1, 593 )
+polygon = PoolVector2Array( 2, 417, 226, 307, 450, 313, 558, 374, 694, 218, 722, 266, 902, 338, 1186, 210, 1474, 306, 2002, 366, 2342, 330, 2718, 394, 2735, 648, -3150, 646, -2968, 586, -2876, 582, -2816, 502, -2892, 454, -3012, 426, -2976, 370, -2764, 318, -2584, 346, -2312, 246, -2144, 266, -1910, 182, -1798, 294, -1626, 366, -1398, 302, -1268, 418, -1088, 446, -900, 390, -746, 310, -534, 322, -354, 222 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -93,12 +117,21 @@ color = Color( 0.0823529, 0.403922, 0.403922, 1 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = SubResource( 2 )
 
 [connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato3" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato4" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato5" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato2" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato6" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato7" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato8" to="." method="_on_Potato_fired"]
 [connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 
 [editable path="Ground"]

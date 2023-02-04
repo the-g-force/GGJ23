@@ -113,6 +113,13 @@ anchor_bottom = 1.0
 margin_top = -40.0
 color = Color( 0.0823529, 0.403922, 0.403922, 1 )
 
+[node name="TimeLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 14.0
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -124,6 +131,10 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = SubResource( 2 )
 
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato3" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato4" to="." method="_on_Potato_fired"]
@@ -133,5 +144,6 @@ texture = SubResource( 2 )
 [connection signal="fired" from="Potato7" to="." method="_on_Potato_fired"]
 [connection signal="fired" from="Potato8" to="." method="_on_Potato_fired"]
 [connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]
 
 [editable path="Ground"]

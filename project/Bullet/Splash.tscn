@@ -1,6 +1,8 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="CPUParticles2D" type="CPUParticles2D"]
+[ext_resource path="res://Bullet/SignallingParticleSystem.gd" type="Script" id=1]
+
+[node name="Splash" type="CPUParticles2D"]
 amount = 40
 lifetime = 2.0
 explosiveness = 0.9
@@ -11,3 +13,4 @@ gravity = Vector2( 0, 400 )
 initial_velocity = 300.0
 scale_amount = 10.0
 color = Color( 0.788235, 0.917647, 0.905882, 1 )
+script = ExtResource( 1 )

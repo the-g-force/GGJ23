@@ -131,12 +131,14 @@ func damage()->void:
 func bury()->void:
 #	while not is_on_floor():
 #		yield(get_tree().create_timer(0.05), "timeout")
+	
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
 	$BuryTween.interpolate_property(self, "position", null, Vector2(position.x, position.y + _BURY_DEPTH), 0.75, Tween.TRANS_QUAD)
 	$BuryTween.start()
-	# the wait is necessary for testing purposes
+	
 	yield($BuryTween, "tween_all_completed")
+	
 	emit_signal("done")
 
 

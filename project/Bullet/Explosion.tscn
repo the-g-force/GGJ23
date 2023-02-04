@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Bullet/SignallingParticleSystem.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.170391, 0.636872, 0.790503, 0.969274 )
@@ -16,3 +18,4 @@ initial_velocity = 91.28
 scale_amount = 14.76
 color = Color( 0.854902, 0.647059, 0.156863, 1 )
 color_ramp = SubResource( 1 )
+script = ExtResource( 1 )

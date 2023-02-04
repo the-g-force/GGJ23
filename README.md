@@ -12,3 +12,5 @@ A game for Global Game Jam 2023.
 - Splash sound is the public domain [Splash](https://freesound.org/people/swordofkings128/sounds/398032/)
 
 - Shoot sound is based on the public domain [Missle Launch 01](https://freesound.org/people/unfa/sounds/232184/)
+
+- Dirt texture is public domain art from OpenGameArt.org [Dirt 10](https://opengameart.org/content/simple-seamless-tiles-of-dirt-and-sand-dirt-10-png)

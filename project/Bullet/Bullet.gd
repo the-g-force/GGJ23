@@ -26,7 +26,7 @@ func _on_Bullet_body_entered(body:Node)->void:
 	
 	for object in $Area2D.get_overlapping_areas():
 		if object.has_method("damage"):
-			object.damage(25)
+			object.damage()
 	
 	SfxPlayer.play_explosion()
 	

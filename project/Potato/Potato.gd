@@ -31,24 +31,26 @@ var _GRAVITY : float = 10 #ProjectSettings.get_setting("physics/2d/default_gravi
 var _velocity := Vector2.ZERO
 var _facing = _Facing.RIGHT
 var _elevation := 0.0
-var _health := 25 # 100
+var spud_name := "" setget _set_name
 
 ## The number of seconds the fire button has been held
 var _hold_duration := 0.0
 
 onready var _weapon_hinge := $WeaponHinge
 onready var _arrow : Sprite = $"%Arrow"
-onready var _health_bar : ProgressBar = $HealthBar
+onready var _name_label : Label = $NameLabel
 onready var _action_prefix := "p%d_" % player_index
 
 
 func _ready():
+	if player_index == 0:
+		_name_label.set("custom_styles/normal", load("res://Resources/Player1StyleBox.tres"))
+	elif player_index == 1:
+		_name_label.set("custom_styles/normal", load("res://Resources/Player2StyleBox.tres"))
 	_set_active(false)
 
 
 func _physics_process(delta:float)->void:
-	_health_bar.value = _health
-	
 	_velocity.y += _GRAVITY
 	
 	if active:
@@ -113,10 +115,13 @@ func _set_shader_percent(percent:float)->void:
 	(_arrow.material as ShaderMaterial).set_shader_param("percent", percent)
 
 
-func damage(amount:int)->void:
-	_health -= amount
-	if _health<=0:
-		emit_signal("died")
+func _set_name(value:String)->void:
+	spud_name = value
+	_name_label.text = spud_name
+
+
+func damage()->void:
+	emit_signal("died")
 
 
 func bury()->void:

@@ -3,6 +3,11 @@ extends Node2D
 
 export var camera_move_speed := 100.0
 
+var potato_names := [
+	"Steve",
+	"The Masher",
+]
+
 var _active_potato : Node2D 
 
 var _player_index := 0
@@ -25,6 +30,8 @@ func _ready()->void:
 	for player_list in _player_potatoes:
 		for potato in player_list:
 			potato.connect("died", self, "_on_Potato_died", [potato])
+			potato.spud_name = potato_names[randi()%potato_names.size()]
+			potato_names.erase(potato.spud_name)
 			if potato != _active_potato:
 				potato.bury()
 	

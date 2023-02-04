@@ -24,8 +24,13 @@ polygon = PoolVector2Array( -34, -36, 30, -25, 38, 51, -40, 47 )
 [node name="Potato" parent="." instance=ExtResource( 3 )]
 position = Vector2( 276, 274 )
 
+[node name="Potato2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1189, 171 )
+player_index = 1
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, 300 )
 current = true
 
 [connection signal="fired" from="Potato" to="." method="_on_Potato_fired"]
+[connection signal="fired" from="Potato2" to="." method="_on_Potato_fired"]

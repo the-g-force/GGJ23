@@ -2,6 +2,10 @@ extends KinematicBody2D
 
 signal fired(bullet)
 
+export var player_index := 0
+
+var active := false
+
 var _GRAVITY : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _velocity := Vector2.ZERO
@@ -10,6 +14,9 @@ var _can_shoot := true
 
 
 func _physics_process(delta:float)->void:
+	if not active:
+		return
+	
 	$WeaponHinge.rotation = get_angle_to(get_global_mouse_position())
 	
 	var direction := Input.get_axis("p0_left", "p0_right")

@@ -5,21 +5,19 @@ signal done
 const KILL_LINE := 600
 
 onready var _explosion_shape : CollisionPolygon2D = $Area2D/ExplosionShape
-
+onready var _spin := rand_range(-PI,PI)
 
 func _ready()->void:
 	_explosion_shape.visible = false
 
 
-func _process(_delta:float)->void:
+func _process(delta:float)->void:
+	$Sprite.rotate(_spin*delta)
+	
 	if global_position.y > KILL_LINE:
 		SfxPlayer.play_splash()
 		emit_signal("done")
 		queue_free()
-
-
-func _draw()->void:
-	draw_circle(Vector2.ZERO, 10, Color.red)
 
 
 func _on_Bullet_body_entered(body:Node)->void:

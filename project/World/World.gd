@@ -1,7 +1,7 @@
 extends Node2D
 
-
-export var camera_move_speed := 100.0
+# camera move speed in pixels per second
+export var camera_move_speed := 500.0
 
 var potato_names := [
 	"Steve",
@@ -19,7 +19,6 @@ var _active_potato : Node2D
 
 var _player_index := 0
 var _is_game_over := false
-var _camera_offset := 0.0
 
 onready var _camera : SmartCamera = $Camera2D
 onready var _turn_timer : Timer = $TurnTimer
@@ -53,14 +52,14 @@ func _physics_process(delta:float)->void:
 	if is_instance_valid(_active_potato) and _active_potato.active:
 		var action_prefix := "p%d_" % _player_index
 		var camera_movement := Input.get_axis(action_prefix + "look_left", action_prefix + "look_right")
-		_camera_offset += camera_movement * camera_move_speed * delta
+		_camera.offset.x += camera_movement * camera_move_speed * delta
 
 
 func _on_Potato_fired(bullet:Node2D)->void:
+	_camera.offset.x = 0.0
 	_turn_timer.stop() # so that the turn doesn't end twice
 	_active_potato.active = false
 	_camera.target = bullet
-	_camera_offset = 0.0
 	var explosion = yield(bullet, "exploded")
 	yield(explosion, "tree_exited")
 	print('Explosion exited tree')
@@ -132,4 +131,5 @@ func _on_PlayAgainButton_pressed():
 func _on_TurnTimer_timeout()->void:
 	SfxPlayer.play_timeout()
 	_active_potato.active = false
+	_camera.offset.x = 0.0
 	_end_potato_turn()

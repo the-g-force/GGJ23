@@ -24,6 +24,10 @@ config/name="GGJ23"
 run/main_scene="res://World/World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SfxPlayer="*res://Common/SfxPlayer.tscn"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

@@ -96,6 +96,8 @@ func _shoot(power:float)->void:
 	var impulse_power = lerp(MIN_IMPULSE_POWER, MAX_IMPULSE_POWER, power)
 	var impulse = Vector2.RIGHT.rotated($WeaponHinge.rotation) * impulse_power
 	bullet.apply_impulse(Vector2.ZERO, impulse)
+	
+	SfxPlayer.play_shoot()
 
 	emit_signal("fired", bullet)
 

@@ -28,6 +28,7 @@ var _active_potato : Node2D
 
 var _player_index := 0
 var _is_game_over := false
+var _shot_this_turn := false
 
 onready var _camera : SmartCamera = $Camera2D
 onready var _turn_timer : Timer = $TurnTimer
@@ -65,6 +66,7 @@ func _physics_process(delta:float)->void:
 
 
 func _on_Potato_fired(bullet:Node2D)->void:
+	_shot_this_turn = true
 	_camera.offset.x = 0.0
 	_turn_timer.stop() # so that the turn doesn't end twice
 	_active_potato.active = false
@@ -88,7 +90,7 @@ func _end_potato_turn()->void:
 
 
 func _start_next_turn()->void:
-	print("onto the next turn")
+	_shot_this_turn = false
 	_player_index = (_player_index + 1) % _player_potatoes.size()
 	
 	_active_potato = _player_potatoes[_player_index][0]
@@ -102,7 +104,6 @@ func _start_next_turn()->void:
 
 
 func _on_Potato_died(potato:Node2D)->void:
-	print("potato died")
 	# Short circuit is not savvy to mutual destruction
 	# but it's good enough for jam time.
 	if _is_game_over:
@@ -124,6 +125,10 @@ func _on_Potato_died(potato:Node2D)->void:
 	elif _player_potatoes[1].size() == 0:
 		print('PLAYER 1 WON')
 		_do_game_over('PLAYER 1')
+	
+	if not _shot_this_turn:
+		_turn_timer.stop()
+		_start_next_turn()
 
 
 func _do_game_over(message:String)->void:

@@ -1,4 +1,4 @@
-name=potato
+name=stormclouds_over_spudville
 godot=godot
 
 all: windows linux zip

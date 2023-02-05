@@ -26,8 +26,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GGJ23"
-run/main_scene="res://World/World.tscn"
+config/name="Stormclouds over Spudville"
+run/main_scene="res://UI/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

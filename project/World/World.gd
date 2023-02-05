@@ -33,6 +33,7 @@ var _active_potato : Node2D
 var _player_index := 0
 var _is_game_over := false
 var _shot_this_turn := false
+var _potato_died := false
 
 onready var _camera : SmartCamera = $Camera2D
 onready var _turn_timer : Timer = $TurnTimer
@@ -53,7 +54,7 @@ func _ready()->void:
 	
 	for player_list in _player_potatoes:
 		for potato in player_list:
-			potato.connect("died", self, "_on_Potato_died", [potato])
+			potato.connect("died", self, "_on_Potato_died")
 			potato.spud_name = potato_names[randi()%potato_names.size()]
 			potato_names.erase(potato.spud_name)
 			if potato != _active_potato:
@@ -81,8 +82,8 @@ func _on_Potato_fired(bullet:Node2D)->void:
 	_camera.target = bullet
 	var explosion = yield(bullet, "exploded")
 	yield(explosion, "tree_exited")
-	
-	_end_potato_turn()
+	if not _potato_died:
+		_end_potato_turn()
 
 
 func _end_potato_turn()->void:
@@ -97,6 +98,7 @@ func _end_potato_turn()->void:
 
 
 func _start_next_turn()->void:
+	_potato_died = false
 	_shot_this_turn = false
 	_player_index = (_player_index + 1) % _player_potatoes.size()
 	
@@ -110,7 +112,9 @@ func _start_next_turn()->void:
 	_turn_timer.start()
 
 
-func _on_Potato_died(potato:Node2D)->void:
+func _on_Potato_died(potato:Node2D, ghost:Node2D)->void:
+	_potato_died = true
+	_turn_timer.stop()
 	# Short circuit is not savvy to mutual destruction
 	# but it's good enough for jam time.
 	if _is_game_over:
@@ -123,6 +127,7 @@ func _on_Potato_died(potato:Node2D)->void:
 	
 	# Eliminate the potato from the world
 	potato.queue_free()
+	yield(ghost, "tree_exited")
 	
 	# See if anyone has won
 	if _player_potatoes[0].size() == 0:
@@ -131,9 +136,8 @@ func _on_Potato_died(potato:Node2D)->void:
 	elif _player_potatoes[1].size() == 0:
 		_do_game_over('Red team')
 	
-	if not _shot_this_turn:
-		_turn_timer.stop()
-		_start_next_turn()
+	if _potato_died:
+		_end_potato_turn()
 
 
 func _do_game_over(message:String)->void:

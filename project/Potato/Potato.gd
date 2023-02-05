@@ -55,7 +55,7 @@ func _physics_process(delta:float)->void:
 	
 	if position.y > 600:
 		SfxPlayer.play_splash()
-		emit_signal("died")
+		damage()
 	
 	if active:
 		var direction := Input.get_axis(_action_prefix + "left", _action_prefix + "right")
@@ -125,7 +125,10 @@ func _set_name(value:String)->void:
 
 
 func damage()->void:
-	emit_signal("died")
+	var ghost = load("res://Potato/PotatoGhost.tscn").instance()
+	ghost.global_position = global_position
+	get_parent().add_child(ghost)
+	emit_signal("died", self, ghost)
 
 
 func bury()->void:

@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Potato/wing.png" type="Texture" id=2]
+[ext_resource path="res://Potato/russet.png" type="Texture" id=3]
+[ext_resource path="res://Potato/Eye.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Potato/PotatoGhost.gd" type="Script" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "FlyAway"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("WingRight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3 ),
+"transitions": PoolRealArray( 3.03143, 0.217638, 3.4822, 0.258816, 2.73208, 0.25, 1 ),
+"update": 0,
+"values": [ 0.0, 72.5789, 5.37412, 72.5789, 5.37412, 72.5789, 5.37412 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WingLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3 ),
+"transitions": PoolRealArray( 3.03143, 0.217638, 3.4822, 0.258816, 2.73208, 0.25, 1 ),
+"update": 0,
+"values": [ 0.0, -79.5993, 6.42336, -79.5993, 6.42336, -79.5993, 6.42336 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WingRight:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WingLeft:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="PotatoGhost" type="Node2D"]
+modulate = Color( 1, 1, 1, 0.694118 )
+script = ExtResource( 5 )
+
+[node name="WingRight" type="Sprite" parent="."]
+position = Vector2( 16, -5 )
+texture = SubResource( 1 )
+offset = Vector2( 13, -13 )
+
+[node name="WingLeft" type="Sprite" parent="."]
+position = Vector2( -17, -5 )
+texture = SubResource( 1 )
+offset = Vector2( -11, -12 )
+flip_h = true
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
+texture = ExtResource( 3 )
+
+[node name="EyeLeft" parent="." instance=ExtResource( 4 )]
+position = Vector2( -8, -29 )
+
+[node name="EyeRight" parent="." instance=ExtResource( 4 )]
+position = Vector2( 11, -26 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "FlyAway"
+anims/FlyAway = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]

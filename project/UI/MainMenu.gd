@@ -17,5 +17,11 @@ func _on_PlayButton_pressed()->void:
 
 
 func _on_FullscreenToggle_toggled(button_pressed:bool)->void:
-	_button_sound.play()	
+	_button_sound.play()
 	OS.window_fullscreen = button_pressed
+
+
+func _on_QuitButton_pressed()->void:
+	_button_sound.play()
+	yield(_button_sound, "finished")
+	get_tree().quit()

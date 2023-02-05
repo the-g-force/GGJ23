@@ -20,6 +20,10 @@ var potato_names := [
 	"Fry",
 	"Vladimir Poutine",
 	"Pomme Pomme",
+	"Yukon Gold",
+	"Brotato",
+	"Idaho Jones",
+	"Argos",
 	"Quayle's Folly",
 	"Mr. Head",
 ]
@@ -118,10 +122,10 @@ func _on_Potato_died(potato:Node2D)->void:
 	
 	# See if anyone has won
 	if _player_potatoes[0].size() == 0:
-		_do_game_over('BLUE TEAM')
+		_do_game_over('Blue team')
 	
 	elif _player_potatoes[1].size() == 0:
-		_do_game_over('RED TEAM')
+		_do_game_over('Red team')
 	
 	if not _shot_this_turn:
 		_turn_timer.stop()
@@ -130,7 +134,12 @@ func _on_Potato_died(potato:Node2D)->void:
 
 func _do_game_over(message:String)->void:
 	_is_game_over = true
-	$"%WinnerLabel".text = "%s has won" % message
+	$"%WinnerLabel".text = "%s has won!" % message
+	
+	# make the panel blue if blue guys won
+	if _player_potatoes[0].size() == 0:
+		$"%EndGamePanel".set("custom_styles/panel", load("res://Resources/Player2StyleBox.tres"))
+	
 	$"%EndGamePanel".visible = true
 	$"%PlayAgainButton".grab_focus()
 

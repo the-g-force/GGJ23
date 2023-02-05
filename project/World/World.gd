@@ -45,8 +45,10 @@ onready var _player_potatoes := [
 
 
 func _ready()->void:
-	_active_potato = $Potato5
+	_active_potato = _player_potatoes[randi()%2][randi()%4]
 	_camera.target = _active_potato
+	
+	var buried_potato
 	
 	for player_list in _player_potatoes:
 		for potato in player_list:
@@ -55,8 +57,9 @@ func _ready()->void:
 			potato_names.erase(potato.spud_name)
 			if potato != _active_potato:
 				potato.bury()
+				buried_potato = potato
 	
-	yield($Potato, "done")
+	yield(buried_potato, "done")
 	
 	_active_potato.active = true
 	_turn_timer.start()

@@ -8,7 +8,10 @@ onready var _explosion_shape : CollisionPolygon2D = $Area2D/ExplosionShape
 onready var _spin := rand_range(-PI,PI)
 
 func _ready()->void:
-	_explosion_shape.visible = false
+	var points := []
+	for i in 32:
+		points.append(Vector2.RIGHT.rotated(TAU * i / 32) * lerp(65, 70, randf()))
+	_explosion_shape.polygon = points
 
 
 func _process(delta:float)->void:

@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SfxPlayer="*res://Common/SfxPlayer.tscn"
+Jukebox="*res://Common/Jukebox.tscn"
 
 [display]
 

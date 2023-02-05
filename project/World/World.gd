@@ -40,6 +40,8 @@ var _potato_died := false
 
 onready var _camera : SmartCamera = $Camera2D
 onready var _turn_timer : Timer = $TurnTimer
+onready var _buttons := [$"%PlayAgainButton", $"%MainMenuButton"]
+
 
 # We want the nested lists to be a continuous queue of potato turn orders.
 var _player_potatoes := [
@@ -198,6 +200,12 @@ func _do_game_over(message:String)->void:
 
 
 func _on_PlayAgainButton_pressed():
+	for button in _buttons:
+		button.disabled = true
+	
+	$ButtonClickSound.play()
+	yield($ButtonClickSound, "finished")
+	
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://World/World.tscn")
 
@@ -210,5 +218,11 @@ func _on_TurnTimer_timeout()->void:
 
 
 func _on_MainMenuButton_pressed():
+	for button in _buttons:
+		button.disabled = true
+	
+	$ButtonClickSound.play()
+	yield($ButtonClickSound, "finished")
+	
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://UI/MainMenu.tscn")

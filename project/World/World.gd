@@ -57,6 +57,8 @@ func _ready()->void:
 	
 	_player_index = randi() % 2
 	_active_potato = _player_potatoes[_player_index][randi()%4]
+	_player_potatoes[_player_index].erase(_active_potato)
+	_player_potatoes[_player_index].append(_active_potato)
 	_camera.target = _active_potato
 	
 	var buried_potato

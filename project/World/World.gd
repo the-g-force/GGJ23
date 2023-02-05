@@ -104,6 +104,8 @@ func _spawn_potatoes()->void:
 		_add_potato(spawn_point, 0)
 	for spawn_point in $BlueSpawns.get_children():
 		_add_potato(spawn_point, 1)
+	_player_potatoes[0].shuffle()
+	_player_potatoes[1].shuffle()
 
 
 func _add_potato(spawn_point:Position2D, index:int)->void:

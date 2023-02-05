@@ -62,16 +62,16 @@ __meta__ = {
 [node name="RedSpawns" type="Node2D" parent="."]
 
 [node name="Position2D" type="Position2D" parent="RedSpawns"]
-position = Vector2( 50, 0 )
+position = Vector2( 61, 0 )
 
 [node name="Position2D2" type="Position2D" parent="RedSpawns"]
 position = Vector2( 966, -5 )
 
 [node name="Position2D3" type="Position2D" parent="RedSpawns"]
-position = Vector2( 1887, 0 )
+position = Vector2( 2106, 0 )
 
 [node name="Position2D4" type="Position2D" parent="RedSpawns"]
-position = Vector2( 3112, 0 )
+position = Vector2( 3374, -5 )
 
 [node name="BlueSpawns" type="Node2D" parent="."]
 
@@ -79,13 +79,13 @@ position = Vector2( 3112, 0 )
 position = Vector2( 400, -5 )
 
 [node name="Position2D2" type="Position2D" parent="BlueSpawns"]
-position = Vector2( 1436, -22 )
+position = Vector2( 1527, 15 )
 
 [node name="Position2D3" type="Position2D" parent="BlueSpawns"]
-position = Vector2( 2500, 0 )
+position = Vector2( 2740, 0 )
 
 [node name="Position2D4" type="Position2D" parent="BlueSpawns"]
-position = Vector2( 3950, 0 )
+position = Vector2( 3902, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, 300 )
@@ -93,9 +93,6 @@ current = true
 script = ExtResource( 4 )
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
-
-[node name="CollisionPolygon2D" parent="Ground" index="0"]
-polygon = PoolVector2Array( 2, 417, 226, 307, 450, 313, 558, 374, 694, 218, 722, 266, 902, 338, 1186, 210, 1474, 306, 1626, 406, 1626, 639, -2306, 652, -2312, 246, -2144, 266, -1910, 182, -1798, 294, -1626, 366, -1398, 302, -1268, 418, -1088, 446, -900, 390, -746, 310, -534, 322, -354, 222 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -218,5 +215,3 @@ one_shot = true
 [connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndGamePanel/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]
-
-[editable path="Ground"]

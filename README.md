@@ -1,6 +1,13 @@
-# Untitled Potato Game
+# Stormclouds Over Spudville
 
-A game for Global Game Jam 2023.
+A two-player competition between bad potatoes. 
+
+Gamepads are highly recommended. Left stick to move horizontally and aim, right stick to look around, and 'A' button
+to charge your attack.
+
+Original music by [Harmonic Legion](https://soundcloud.com/harmoniclegion).
+
+A game for [Global Game Jam 2023](https://globalgamejam.org/2023/games/potato-1).
 
 ## Building
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://World/DestructibleTerrain.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://World/SmartCamera.gd" type="Script" id=4]
 [ext_resource path="res://World/TimeLabel.gd" type="Script" id=5]
 [ext_resource path="res://Resources/HappyMonkey-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://World/Clouds/Cloud1.png" type="Texture" id=7]
+[ext_resource path="res://World/Clouds/Cloud2.png" type="Texture" id=8]
+[ext_resource path="res://World/Clouds/Cloud3.png" type="Texture" id=9]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -142,14 +145,53 @@ timer = NodePath("../../TurnTimer")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0, 0 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+[node name="SkyGradient" type="Sprite" parent="ParallaxBackground/Sky"]
 texture = SubResource( 2 )
+
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+
+[node name="Cloud" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( 36, -127 )
+texture = ExtResource( 7 )
+
+[node name="Cloud2" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( -590, -251 )
+texture = ExtResource( 8 )
+
+[node name="Cloud3" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( 618, -4 )
+texture = ExtResource( 8 )
+
+[node name="Cloud4" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( 971, -191 )
+texture = ExtResource( 7 )
+
+[node name="Cloud5" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( -1388, 79 )
+texture = ExtResource( 7 )
+
+[node name="Cloud6" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( -994, -126 )
+texture = ExtResource( 7 )
+
+[node name="Cloud7" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( -265, 18 )
+texture = ExtResource( 7 )
+
+[node name="Cloud8" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( -780, 90 )
+texture = ExtResource( 9 )
+
+[node name="Cloud9" type="Sprite" parent="ParallaxBackground/Clouds"]
+position = Vector2( 1283, -41 )
+texture = ExtResource( 8 )
 
 [node name="TurnTimer" type="Timer" parent="."]
 wait_time = 10.0

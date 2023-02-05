@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Bullet/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://Bullet/bullet.png" type="Texture" id=2]
+[ext_resource path="res://Bullet/Particle.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.134078, 0.52514, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.882353, 0.882353, 0.882353, 0.596078, 0.0980392, 0.0980392, 0.0980392, 0.654902 )
 
 [node name="Bullet" type="RigidBody2D"]
 contacts_reported = 1
@@ -17,6 +22,21 @@ shape = SubResource( 1 )
 
 [node name="ExplosionShape" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PoolVector2Array( -2, -80, 43, -60, 66, -1, 49, 44, -1, 73, -56, 45, -58, -13, -45, -53 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+scale = Vector2( 1, 1 )
+lifetime = 0.25
+randomness = 1.0
+local_coords = false
+texture = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2( 180, 180 )
+spread = 10.0
+initial_velocity_random = 0.3
+scale_amount = 1.5
+color = Color( 0.917647, 0.792157, 0.678431, 1 )
+color_ramp = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

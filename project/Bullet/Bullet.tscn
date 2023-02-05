@@ -10,7 +10,7 @@
 offsets = PoolRealArray( 0.134078, 0.52514, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.882353, 0.882353, 0.882353, 0.596078, 0.0980392, 0.0980392, 0.0980392, 0.654902 )
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" groups=["bullet"]]
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )
@@ -24,7 +24,6 @@ shape = SubResource( 1 )
 polygon = PoolVector2Array( -2, -80, 43, -60, 66, -1, 49, 44, -1, 73, -56, 45, -58, -13, -45, -53 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-scale = Vector2( 1, 1 )
 lifetime = 0.25
 randomness = 1.0
 local_coords = false

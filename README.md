@@ -27,3 +27,5 @@ make godot=/mnt/c/Users/pvgestwicki/Desktop/Godot_v3.5-stable_win64.exe
 - Button press is the public domain [Button 05](https://freesound.org/people/JarredGibb/sounds/219476/)
 
 - Timeout sound is the public domain [Error Signal 1](https://freesound.org/people/Breviceps/sounds/445976/)
+
+- Wing images are public domain from OpenGameArt.org [white wing](https://opengameart.org/content/white-wing-32x32)

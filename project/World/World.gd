@@ -2,6 +2,9 @@ extends Node2D
 
 # camera move speed in pixels per second
 export var camera_move_speed := 500.0
+export var normal_height := 250
+export var height_variation := 300
+export (int, 100, 1000) var detail := 400
 
 var potato_names := [
 	"Steve",
@@ -39,13 +42,19 @@ onready var _camera : SmartCamera = $Camera2D
 onready var _turn_timer : Timer = $TurnTimer
 
 # We want the nested lists to be a continuous queue of potato turn orders.
-onready var _player_potatoes := [
-	[$Potato, $Potato3, $Potato4, $Potato5],
-	[$Potato2, $Potato6, $Potato7, $Potato8]
+var _player_potatoes := [
+	[],
+	[]
 ]
 
 
 func _ready()->void:
+	_generate_ground()
+	
+	yield(get_tree(), "idle_frame")
+	
+	_spawn_potatoes()
+	
 	_player_index = randi() % 2
 	_active_potato = _player_potatoes[_player_index][randi()%4]
 	_camera.target = _active_potato
@@ -55,6 +64,7 @@ func _ready()->void:
 	for player_list in _player_potatoes:
 		for potato in player_list:
 			potato.connect("died", self, "_on_Potato_died")
+			potato.connect("fired", self, "_on_Potato_fired")
 			potato.spud_name = potato_names[randi()%potato_names.size()]
 			potato_names.erase(potato.spud_name)
 			if potato != _active_potato:
@@ -72,6 +82,37 @@ func _physics_process(delta:float)->void:
 		var action_prefix := "p%d_" % _player_index
 		var camera_movement := Input.get_axis(action_prefix + "look_left", action_prefix + "look_right")
 		_camera.offset.x += camera_movement * camera_move_speed * delta
+
+
+func _generate_ground()->void:
+	var noise = OpenSimplexNoise.new()
+	noise.seed = randi()
+	
+	var points := []
+	
+	for i in detail:
+		points.append(Vector2(i * 4000 / detail, 600 - (normal_height + noise.get_noise_1d(i) * height_variation)))
+	points.append_array([
+		Vector2(4000, 700), Vector2(0, 700)
+	])
+	
+	$Ground.polygon = points
+
+
+func _spawn_potatoes()->void:
+	for spawn_point in $RedSpawns.get_children():
+		_add_potato(spawn_point, 0)
+	for spawn_point in $BlueSpawns.get_children():
+		_add_potato(spawn_point, 1)
+
+
+func _add_potato(spawn_point:Position2D, index:int)->void:
+	var intersection := get_world_2d().direct_space_state.intersect_ray(spawn_point.position, Vector2(spawn_point.position.x, 700))
+	var potato := preload("res://Potato/Potato.tscn").instance()
+	potato.player_index = index
+	potato.position = Vector2(intersection.position.x, intersection.position.y - 50)
+	$Potatoes.add_child(potato)
+	_player_potatoes[index].append(potato)
 
 
 func _on_Potato_fired(bullet:Node2D)->void:

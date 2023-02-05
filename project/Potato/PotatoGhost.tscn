@@ -112,9 +112,11 @@ texture = ExtResource( 3 )
 
 [node name="EyeLeft" parent="." instance=ExtResource( 4 )]
 position = Vector2( -8, -29 )
+rotation = 3.14159
 
 [node name="EyeRight" parent="." instance=ExtResource( 4 )]
 position = Vector2( 11, -26 )
+rotation = 3.14159
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "FlyAway"

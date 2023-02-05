@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/HappyMonkey-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://UI/click.wav" type="AudioStream" id=3]
+[ext_resource path="res://UI/Title.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -32,24 +33,23 @@ margin_top = -20.0
 margin_right = 172.0
 margin_bottom = 20.0
 
-[node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 344.0
-margin_bottom = 30.0
-text = "Stormclouds over Spudville"
-align = 1
+[node name="Title" type="TextureRect" parent="VBoxContainer"]
+margin_right = 433.0
+margin_bottom = 168.0
+texture = ExtResource( 4 )
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 34.0
-margin_right = 344.0
-margin_bottom = 70.0
+margin_top = 172.0
+margin_right = 433.0
+margin_bottom = 208.0
 text = "Play"
 
 [node name="FullscreenToggle" type="CheckButton" parent="VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 74.0
-margin_right = 344.0
-margin_bottom = 114.0
+margin_top = 212.0
+margin_right = 433.0
+margin_bottom = 252.0
 text = "Fullscreen"
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]

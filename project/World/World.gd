@@ -73,7 +73,6 @@ func _on_Potato_fired(bullet:Node2D)->void:
 	_camera.target = bullet
 	var explosion = yield(bullet, "exploded")
 	yield(explosion, "tree_exited")
-	print('Explosion exited tree')
 	
 	_end_potato_turn()
 
@@ -119,12 +118,10 @@ func _on_Potato_died(potato:Node2D)->void:
 	
 	# See if anyone has won
 	if _player_potatoes[0].size() == 0:
-		print('PLAYER 2 WON')
-		_do_game_over('PLAYER 2')
+		_do_game_over('BLUE TEAM')
 	
 	elif _player_potatoes[1].size() == 0:
-		print('PLAYER 1 WON')
-		_do_game_over('PLAYER 1')
+		_do_game_over('RED TEAM')
 	
 	if not _shot_this_turn:
 		_turn_timer.stop()
